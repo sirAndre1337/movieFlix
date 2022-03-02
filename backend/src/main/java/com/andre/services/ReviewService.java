@@ -31,7 +31,7 @@ public class ReviewService {
 		User user = new User();
 		Movie movie = new Movie();
 		
-		user.setId(dto.getUserId());
+		user.setId(dto.getUser().getId());
 		movie.setId(dto.getMovieId());
 		
 		review.setMovie(movie);

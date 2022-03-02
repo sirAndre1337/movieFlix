@@ -2,6 +2,7 @@ package com.andre.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 import com.andre.entities.Review;
@@ -12,31 +13,29 @@ public class ReviewDTO implements Serializable {
 	private Long id;
 
 	@NotEmpty(message = "Review deve ser preenchido")
+	@NotBlank
 	private String text;
-	
-	private Long userId;
 	
 	private Long movieId;
 	
-	private String nameUser;
-
+	private UserDTO user;
+	
 	public ReviewDTO() {
 	}
 
-	public ReviewDTO(Long id, String text, Long userId, Long movieId) {
+	public ReviewDTO(Long id, String text, Long movieId, UserDTO user) {
 		super();
 		this.id = id;
 		this.text = text;
-		this.userId = userId;
+		this.user = user;
 		this.movieId = movieId;
 	}
 
 	public ReviewDTO(Review entity) {
 		id = entity.getId();
 		text = entity.getText();
-		userId = entity.getUser().getId();
+		user = new UserDTO(entity.getUser());
 		movieId = entity.getMovie().getId();
-		nameUser = entity.getUser().getName();
 	}
 
 	public Long getId() {
@@ -55,14 +54,6 @@ public class ReviewDTO implements Serializable {
 		this.text = text;
 	}
 
-	public Long getUserId() {
-		return userId;
-	}
-	
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-	
 	public Long getMovieId() {
 		return movieId;
 	}
@@ -71,11 +62,11 @@ public class ReviewDTO implements Serializable {
 		this.movieId = movieId;
 	}
 	
-	public String getNameUser() {
-		return nameUser;
+	public void setUser(UserDTO user) {
+		this.user = user;
 	}
 	
-	public void setNameUser(String nameUser) {
-		this.nameUser = nameUser;
+	public UserDTO getUser() {
+		return user;
 	}
 }

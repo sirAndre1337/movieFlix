@@ -22,6 +22,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import com.andre.dto.ReviewDTO;
+import com.andre.dto.UserDTO;
 import com.andre.repositories.ReviewRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -47,6 +48,7 @@ public class ReviewResourceIT {
 	private String clientSecret;
 
 	private ReviewDTO newReviewDTO;
+	private UserDTO newReviewUserDto;
 	private String visitorUsername;
 	private String visitorPassword;
 	private String memberUsername;
@@ -61,8 +63,11 @@ public class ReviewResourceIT {
 		memberPassword = "123456";
 		
 		newReviewDTO = new ReviewDTO();
+		newReviewUserDto = new UserDTO();
+		newReviewUserDto.setId(1L);
 		newReviewDTO.setText("Good good good");
 		newReviewDTO.setMovieId(1L);
+		newReviewDTO.setUser(newReviewUserDto);
 	}
 
 	@Test
@@ -79,4 +84,79 @@ public class ReviewResourceIT {
 		result.andExpect(status().isUnauthorized());
 	}
 
+	@Test
+	public void insertShouldReturnForbiddenWhenVisitorAuthenticated() throws Exception {
+	
+		String accessToken = obtainAccessToken(visitorUsername, visitorPassword);
+		
+		String jsonBody = objectMapper.writeValueAsString(newReviewDTO);
+		
+		ResultActions result =
+				mockMvc.perform(post("/reviews")
+						.header("Authorization", "Bearer " + accessToken)
+						.content(jsonBody)
+						.contentType(MediaType.APPLICATION_JSON)
+						.accept(MediaType.APPLICATION_JSON));
+
+		result.andExpect(status().isForbidden());
+	}
+	
+	@Test
+	public void insertShouldInsertReviewWhenMemberAuthenticatedAndValidData() throws Exception {
+		
+		String accessToken = obtainAccessToken(memberUsername, memberPassword);
+		
+		String jsonBody = objectMapper.writeValueAsString(newReviewDTO);
+		
+		long expectedCount = reviewRepository.count() + 1;
+		
+		ResultActions result =
+				mockMvc.perform(post("/reviews")
+						.header("Authorization", "Bearer " + accessToken)
+						.content(jsonBody)
+						.contentType(MediaType.APPLICATION_JSON)
+						.accept(MediaType.APPLICATION_JSON));
+		
+		result.andExpect(status().isCreated());
+		result.andExpect(jsonPath("$.user").exists());
+		result.andExpect(jsonPath("$.user.id").exists());
+		Assertions.assertEquals(expectedCount, reviewRepository.count());
+	}
+	
+	@Test
+	public void insertShouldReturnUnproccessableEntityWhenMemberAuthenticatedAndInvalidData() throws Exception {
+		
+		String accessToken = obtainAccessToken(memberUsername, memberPassword);
+		
+		newReviewDTO.setText("     ");
+		String jsonBody = objectMapper.writeValueAsString(newReviewDTO);
+		
+		ResultActions result =
+				mockMvc.perform(post("/reviews")
+						.header("Authorization", "Bearer " + accessToken)
+						.content(jsonBody)
+						.contentType(MediaType.APPLICATION_JSON)
+						.accept(MediaType.APPLICATION_JSON));
+
+		result.andExpect(status().isUnprocessableEntity());
+	}
+	
+	private String obtainAccessToken(String username, String password) throws Exception {
+
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add("grant_type", "password");
+		params.add("client_id", clientId);
+		params.add("username", username);
+		params.add("password", password);
+
+		ResultActions result = mockMvc
+				.perform(post("/oauth/token").params(params).with(httpBasic(clientId, clientSecret))
+						.accept("application/json;charset=UTF-8"))
+				.andExpect(status().isOk()).andExpect(content().contentType("application/json;charset=UTF-8"));
+
+		String resultString = result.andReturn().getResponse().getContentAsString();
+
+		JacksonJsonParser jsonParser = new JacksonJsonParser();
+		return jsonParser.parseMap(resultString).get("access_token").toString();
+	}
 }
