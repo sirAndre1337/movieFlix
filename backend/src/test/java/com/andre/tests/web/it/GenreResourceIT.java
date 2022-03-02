@@ -24,7 +24,9 @@ import org.springframework.util.MultiValueMap;
 
 import com.andre.repositories.GenreRepository;
 import com.andre.dto.GenreDTO;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -96,14 +98,14 @@ public class GenreResourceIT {
 					.contentType(MediaType.APPLICATION_JSON));
 
 		result.andExpect(status().isOk());
-		result.andExpect(jsonPath("$.totalElements").value(countGenres));
-//		Assertions.assertEquals(countGenres, getGenres(result).length);
+		Assertions.assertEquals(countGenres, getGenres(result).length);
 	}
 
-//	private GenreDTO[] getGenres(ResultActions result) throws Exception {
-//		String json = result.andReturn().getResponse().getContentAsString();
-//		return objectMapper.readValue(json, GenreDTO[].class);
-//	}
+	private GenreDTO[] getGenres(ResultActions result) throws Exception {
+		String json = result.andReturn().getResponse().getContentAsString();
+		JsonNode node = objectMapper.readValue(json, ObjectNode.class).get("content");
+		return objectMapper.convertValue(node, GenreDTO[].class);
+	}
 
 	private String obtainAccessToken(String username, String password) throws Exception {
 

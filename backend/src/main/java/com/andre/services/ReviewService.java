@@ -6,20 +6,19 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.andre.dto.GenreDTO;
-import com.andre.entities.Genre;
-import com.andre.repositories.GenreRepository;
+import com.andre.dto.ReviewDTO;
+import com.andre.entities.Review;
+import com.andre.repositories.ReviewRepository;
 
 @Service
-public class GenreService {
+public class ReviewService {
 
 	@Autowired
-	private GenreRepository repository;
-
+	private ReviewRepository repository;
+	
 	@Transactional(readOnly = true)
-	public Page<GenreDTO> findAllPaged(PageRequest pageRequest) {
-		Page<Genre> list = repository.findAll(pageRequest);
-		return list.map(x -> new GenreDTO(x));
+	public Page<ReviewDTO> findAllPaged(PageRequest pageRequest) {
+		Page<Review> list = repository.findAll(pageRequest);
+		return list.map(x -> new ReviewDTO(x));
 	}
-
 }
