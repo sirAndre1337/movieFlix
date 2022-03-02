@@ -14,22 +14,29 @@ public class ReviewDTO implements Serializable {
 	@NotEmpty(message = "Review deve ser preenchido")
 	private String text;
 	
-	private UserDTO userDTO;
+	private Long userId;
+	
+	private Long movieId;
+	
+	private String nameUser;
 
 	public ReviewDTO() {
 	}
 
-	public ReviewDTO(Long id, String text, UserDTO userDTO) {
+	public ReviewDTO(Long id, String text, Long userId, Long movieId) {
 		super();
 		this.id = id;
 		this.text = text;
-		this.userDTO = userDTO;
+		this.userId = userId;
+		this.movieId = movieId;
 	}
 
 	public ReviewDTO(Review entity) {
 		id = entity.getId();
 		text = entity.getText();
-		userDTO = new UserDTO(entity.getUser());
+		userId = entity.getUser().getId();
+		movieId = entity.getMovie().getId();
+		nameUser = entity.getUser().getName();
 	}
 
 	public Long getId() {
@@ -48,12 +55,27 @@ public class ReviewDTO implements Serializable {
 		this.text = text;
 	}
 
-	public UserDTO getUserDTO() {
-		return userDTO;
+	public Long getUserId() {
+		return userId;
 	}
-
-	public void setUserDTO(UserDTO userDTO) {
-		this.userDTO = userDTO;
+	
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
-
+	
+	public Long getMovieId() {
+		return movieId;
+	}
+	
+	public void setMovieId(Long movieId) {
+		this.movieId = movieId;
+	}
+	
+	public String getNameUser() {
+		return nameUser;
+	}
+	
+	public void setNameUser(String nameUser) {
+		this.nameUser = nameUser;
+	}
 }
