@@ -52,4 +52,5 @@ INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (9,1);
 INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (9,3);
 INSERT INTO tb_movie_genre (movie_id, genre_id) VALUES (10,1);
 
+INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Filme pika' , 10, 3);
 
