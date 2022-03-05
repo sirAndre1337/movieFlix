@@ -3,8 +3,9 @@
     justify-content: center;
     padding-left: 75px;
     padding-top: 40px;
-    padding-bottom: 350px;
+    // padding-bottom: 350px;
     padding-right: 120px;
+    --bs-gutter-x: 0;
 }
 
 .home-title {
@@ -47,4 +48,12 @@
     text-align: center;
     letter-spacing: -0.015em;
     color: #FFFFFF;
+}
+
+.login-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    margin-top: 15px;
+    text-align: center;
 }
