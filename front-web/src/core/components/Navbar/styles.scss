@@ -7,6 +7,20 @@
     margin-right: 0;
 }
 
-.nav-logo-text {
-    color: black;
+.nav-logo-text ,a{
+    color: black !important; 
+    text-decoration: none;
+}
+
+.nav-logout {
+    display: flex;
+    width: 100px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 10px;
+    color: #000000;
+    font-weight: bold;
 }
