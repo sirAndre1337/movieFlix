@@ -1,4 +1,5 @@
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import Footbar from "./core/components/Footbar";
 import Navbar from "./core/components/Navbar";
 import PrivateRoute from "./core/components/Routes/PrivateRoute";
 import Home from "./pages/Home";
@@ -16,6 +17,7 @@ const Routes = () => (
                 <Movie />
             </PrivateRoute>
         </Switch>
+        <Footbar />
     </BrowserRouter>
 );
 
