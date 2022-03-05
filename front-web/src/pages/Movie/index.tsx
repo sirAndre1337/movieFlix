@@ -15,7 +15,7 @@ const Movie = () => {
     const getMovies = useCallback(() => {
         const params = {
             page: activePage,
-            linesPerPage: 12,
+            linesPerPage: 4,
             genreId: genre?.id
         }
         setIsLoading(true);
@@ -29,6 +29,8 @@ const Movie = () => {
     useEffect(() => {
         getMovies();
     }, [getMovies])
+    
+    console.log(movieResponse);
     
     return (
         <div className='movie-container'>
