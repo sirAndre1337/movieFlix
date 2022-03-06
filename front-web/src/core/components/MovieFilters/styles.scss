@@ -1,0 +1,30 @@
+.filter-select-container {
+    width: 20%;
+    padding: 10px 20px;
+    border-radius: 10px;
+    
+    .movie-genre-select__control {
+        height: 30px;
+        border-radius: 4px;
+        border: 1px solid #E1E1E1;
+        background-color: #6C6C6C;
+
+        &:hover {
+            box-shadow: none; 
+        }
+    }
+
+    .movie-genre-select__indicator-separator {
+        display: none;
+    }
+
+    .movie-genre-select__placeholder {
+        color: #FFC700;
+    }
+
+    .movie-genre-select__single-value {
+        color: #FFC700;
+    }
+}
+
+

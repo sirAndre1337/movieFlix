@@ -3,7 +3,7 @@ import { generateList } from "../../../../core/utils/list";
 
 const MovieCardLoader = () => {
 
-    const loaderItems = generateList(5);
+    const loaderItems = generateList(4);
 
     return (
         <>
