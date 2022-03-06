@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Genre, MovieResponse } from '../../core/types/Movie';
 import { makeRequest } from '../../core/utils/request';
 import MovieCardLoader from './Components/Loaders/MovieCardLoader';
+import Pagination from '../../core/components/Pagination';
 
 const Movie = () => {
 
@@ -37,12 +38,16 @@ const Movie = () => {
             <div>
                 filtro por categoria
             </div>
-            <div className='catalog-movie'>
+            <div className='catalog-movie mb-5'>
                 {isLoading ? <MovieCardLoader /> 
                 : movieResponse?.content.map(movie => (
                     <MovieCard movie={movie} key={movie.id}/>
                 ))}
             </div>
+            {movieResponse && <Pagination
+                totalPages={movieResponse.totalPages}
+                onChange={page => setActivePage(page)}
+            />}
         </div>
     )
 };
