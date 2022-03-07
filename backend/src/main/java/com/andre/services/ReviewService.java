@@ -10,6 +10,7 @@ import com.andre.dto.ReviewDTO;
 import com.andre.entities.Movie;
 import com.andre.entities.Review;
 import com.andre.entities.User;
+import com.andre.repositories.MovieRepository;
 import com.andre.repositories.ReviewRepository;
 
 @Service
@@ -18,9 +19,13 @@ public class ReviewService {
 	@Autowired
 	private ReviewRepository repository;
 	
+	@Autowired
+	private MovieRepository movieRepository;
+	
 	@Transactional(readOnly = true)
-	public Page<ReviewDTO> findAllPaged(PageRequest pageRequest) {
-		Page<Review> list = repository.findAll(pageRequest);
+	public Page<ReviewDTO> findAllPaged(PageRequest pageRequest, Long movieId) {
+		Movie movie = movieRepository.findById(movieId).get();
+		Page<Review> list = repository.findByMovie(pageRequest , movie);
 		return list.map(x -> new ReviewDTO(x));
 	}
 
