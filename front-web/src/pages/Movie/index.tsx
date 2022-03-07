@@ -47,7 +47,7 @@ const Movie = () => {
                  />
             </div>
             <div className='catalog-movie mb-5'>
-                {isLoading ? <MovieCardLoader /> 
+                {isLoading ? <MovieCardLoader numberOfLoaders={4}/> 
                 : movieResponse?.content.map(movie => (
                     <Link to={`/movie/${movie.id}`} key={movie.id}>
                         <MovieCard movie={movie} />

@@ -17,6 +17,7 @@ const Home = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<FormState>();
     const [hasError, setHasError] = useState(false);
     const history = useHistory();
+    
     const onSubmit = (data: FormState) => {
        makeLogin(data, 'login')
             .then(response => {

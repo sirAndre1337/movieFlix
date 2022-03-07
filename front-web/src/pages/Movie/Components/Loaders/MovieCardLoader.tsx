@@ -1,9 +1,13 @@
 import ContentLoader from "react-content-loader";
 import { generateList } from "../../../../core/utils/list";
 
-const MovieCardLoader = () => {
+type Props = {
+    numberOfLoaders: number
+}
 
-    const loaderItems = generateList(4);
+const MovieCardLoader = ({numberOfLoaders} : Props) => {
+
+    const loaderItems = generateList(numberOfLoaders);
 
     return (
         <>
