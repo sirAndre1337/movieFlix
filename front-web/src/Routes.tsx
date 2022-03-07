@@ -4,6 +4,7 @@ import Navbar from "./core/components/Navbar";
 import PrivateRoute from "./core/components/Routes/PrivateRoute";
 import Home from "./pages/Home";
 import Movie from "./pages/Movie";
+import MovieDetails from "./pages/Movie/Components/MovieDetails";
 
 const Routes = () => (
     <BrowserRouter>
@@ -16,6 +17,9 @@ const Routes = () => (
             <PrivateRoute path="/movies">
                 <Movie />
             </PrivateRoute>
+            <Route path="/movie/:movieId">
+                <MovieDetails />
+            </Route>
         </Switch>
         <Footbar />
     </BrowserRouter>

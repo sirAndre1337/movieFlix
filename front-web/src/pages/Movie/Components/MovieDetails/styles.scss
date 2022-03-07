@@ -1,0 +1,42 @@
+.movie-details-container {
+    padding-top: 50px;
+    padding-left: 140px;
+    padding-right: 140px;
+}
+
+.movie-details-info {
+    padding: 40px 40px 40px 40px;
+}
+
+.movie-details-info-img {
+    width: 500px;
+    height: 315px;
+}
+
+.movie-details-title {
+    font-size: 36px;
+    line-height: 49px;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+}
+
+.movie-details-year {
+    font-size: 24px;
+    line-height: 33px;
+    letter-spacing: -0.015em;
+    color: #FFC700;
+}
+
+.movie-details-synopse {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid #E1E1E1;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: justify;
+    letter-spacing: -0.015em;
+    color: #9E9E9E;
+}

@@ -6,6 +6,7 @@ import { makeRequest } from '../../core/utils/request';
 import MovieCardLoader from './Components/Loaders/MovieCardLoader';
 import Pagination from '../../core/components/Pagination';
 import MovieFilters from '../../core/components/MovieFilters';
+import { Link } from 'react-router-dom';
 
 const Movie = () => {
 
@@ -48,7 +49,9 @@ const Movie = () => {
             <div className='catalog-movie mb-5'>
                 {isLoading ? <MovieCardLoader /> 
                 : movieResponse?.content.map(movie => (
-                    <MovieCard movie={movie} key={movie.id}/>
+                    <Link to={`/movie/${movie.id}`} key={movie.id}>
+                        <MovieCard movie={movie} />
+                    </Link>
                 ))}
             </div>
             {movieResponse && <Pagination
