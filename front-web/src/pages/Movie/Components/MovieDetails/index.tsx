@@ -88,7 +88,7 @@ const MovieDetails = () => {
                 :
 
                 <div className='movie-details-container'>
-                    <button className="btn btn-primary btn-lg text-white mb-5" onClick={handleCreate}>
+                    <button className="btn btn-primary btn-lg btn-voltar mb-5" onClick={handleCreate}>
                         VOLTAR
                     </button>
                     <div className='row card-base movie-details-info'>
