@@ -1,7 +1,8 @@
 .movie-details-container {
-    padding-top: 50px;
     padding-left: 140px;
     padding-right: 140px;
+    padding-bottom: 60px;
+    margin-bottom: 50px;
 }
 
 .movie-details-info {
@@ -51,4 +52,35 @@
     display: flex;
     justify-content: center;
     justify-items: center;
+}
+
+.movie-reviews {
+    margin-top: 40px;
+    padding: 40px 40px 40px 40px;
+}
+
+.movie-review-icon {
+    margin-right: 15px;
+}
+
+.movie-review-user {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+}
+
+.movie-review-text {
+    border: 1px solid #E1E1E1;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 10px 10px 10px 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: justify;
+    letter-spacing: -0.015em;
+    color: #9E9E9E;
+    margin-bottom: 10px;
 }
