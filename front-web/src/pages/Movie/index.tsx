@@ -54,10 +54,12 @@ const Movie = () => {
                     </Link>
                 ))}
             </div>
-            {movieResponse && <Pagination
-                totalPages={movieResponse.totalPages}
-                onChange={page => setActivePage(page)}
-            />}
+            <div className='pagination-container'>
+                {movieResponse && <Pagination
+                    totalPages={movieResponse.totalPages}
+                    onChange={page => setActivePage(page)}
+                />}
+            </div>
         </div>
     )
 };
